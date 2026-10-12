@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Star&Potato | Pulseras, collares y aritos</title>
+  <meta name="description" content="Star&Potato: pulseras, collares y aritos hechos para hacerte feliz.">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --fondo: #ECE7FF;
+      --tinta: #2A2370;
+      --estrella: #FFC93C;
+      --papa: #C48B50;
+      --rosa: #FF8FA3;
+      --blanco: #FFFFFF;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Nunito", system-ui, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--tinta);
+      background: var(--fondo);
+    }
+    h1, h2, h3 { font-family: "Fredoka", "Nunito", sans-serif; font-weight: 600; line-height: 1.15; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }
+    .contenedor { width: min(100% - 2.5rem, 62rem); margin-inline: auto; }
+
+    /* Menú */
+    header { padding: 1rem 0; }
+    header .contenedor { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .marca { font-family: "Fredoka", sans-serif; font-size: 1.4rem; font-weight: 600; text-decoration: none; }
+    nav { display: flex; gap: 1.2rem; }
+    nav a { text-decoration: none; font-weight: 600; }
+    nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    /* Portada */
+    .portada { padding: 3rem 0 4rem; text-align: center; }
+    .logo-visual { display: flex; justify-content: center; align-items: flex-end; gap: 1rem; margin-bottom: 2rem; }
+    .estrella {
+      width: 110px; height: 110px; background: var(--estrella);
+      clip-path: polygon(50% 0, 62% 35%, 98% 35%, 69% 57%, 80% 92%, 50% 70%, 20% 92%, 31% 57%, 2% 35%, 38% 35%);
+      animation: giro 1.2s ease-out 1;
+    }
+    .papa { width: 90px; height: 70px; background: var(--papa); border-radius: 55% 45% 50% 50% / 60% 55% 45% 40%; position: relative; }
+    .papa::before, .papa::after { content: ""; position: absolute; width: 8px; height: 8px; background: #8F6030; border-radius: 50%; }
+    .papa::before { top: 20px; left: 24px; }
+    .papa::after { top: 36px; left: 52px; }
+    @keyframes giro { from { transform: rotate(-120deg) scale(.4); opacity: 0; } to { transform: none; opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .estrella { animation: none; } html { scroll-behavior: auto; } }
+
+    .portada h1 { font-size: clamp(2.2rem, 8vw, 3.8rem); max-width: 14ch; margin: 0 auto 1rem; }
+    .portada p { max-width: 36ch; margin: 0 auto 1.8rem; }
+    .boton {
+      display: inline-block; padding: .8rem 1.6rem; border-radius: 999px;
+      background: var(--tinta); color: var(--blanco); font-weight: 600; text-decoration: none;
+    }
+    .boton:hover { background: #3B32A0; }
+    /* Secciones */
+    section { padding: 3.5rem 0; }
+    h2 { font-size: clamp(1.7rem, 5vw, 2.3rem); margin-bottom: 1.5rem; }
+
+    .productos { background: var(--blanco); }
+    .intro { margin-bottom: 1.2rem; }
+    .filtros { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+    .filtros button {
+      font: inherit; font-weight: 600; padding: .5rem 1.1rem; border-radius: 999px;
+      border: 2px solid var(--tinta); background: transparent; color: var(--tinta); cursor: pointer;
+    }
+    .filtros button[aria-pressed="true"] { background: var(--tinta); color: var(--blanco); }
+    .rejilla { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr)); }
+    .producto { margin: 0; border-radius: 1.2rem; overflow: hidden; background: var(--fondo); }
+    .producto[hidden] { display: none; }
+    .producto button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+    .producto img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+    .producto figcaption { padding: .7rem .9rem .9rem; font-weight: 600; line-height: 1.3; }
+    dialog { border: 0; padding: 0; border-radius: 1.2rem; max-width: min(92vw, 40rem); background: var(--blanco); color: var(--tinta); text-align: center; }
+    dialog::backdrop { background: rgba(42, 35, 112, .7); }
+    dialog img { display: block; max-width: 100%; max-height: 74vh; margin: 0 auto; }
+    dialog p { padding: .8rem 1rem .4rem; font-weight: 600; }
+    dialog .cerrar { font: inherit; border: 0; cursor: pointer; margin: 0 0 1rem; }
+
+    .nosotros p { max-width: 55ch; }
+    .nosotros p + p { margin-top: 1rem; }
+
+    .contacto { background: var(--estrella); text-align: center; }
+    .contacto p { margin-bottom: 1.4rem; }
+    .contacto .boton { margin: .3rem; }
+
+    footer { padding: 1.5rem 0; text-align: center; font-size: .9rem; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="contenedor">
+      <a class="marca" href="#inicio">Star&amp;Potato</a>
+      <nav aria-label="Principal">
+        <a href="#productos">Productos</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <div class="portada">
+      <div class="contenedor">
+        <div class="logo-visual" aria-hidden="true">
+          <div class="estrella"></div>
+          <div class="papa"></div>
+        </div>
+        <h1>Joyitas para días felices</h1>
+        <p>Pulseras, collares y aritos para que cada día tenga un detalle que te haga sonreír.</p>
+        <a class="boton" href="#productos">Ver productos</a>
+      </div>
+    </div>
+    <section class="productos" id="productos">
+      <div class="contenedor">
+        <h2>Lo que hacemos</h2>
+        <p class="intro">Toca una foto para verla en grande. Para precios y pedidos, escríbenos por Instagram.</p>
+        <div class="filtros" role="group" aria-label="Filtrar productos">
+          <button type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+          <button type="button" data-filtro="pulseras" aria-pressed="false">Pulseras</button>
+          <button type="button" data-filtro="collares" aria-pressed="false">Collares</button>
+          <button type="button" data-filtro="aritos" aria-pressed="false">Aritos</button>
+          <button type="button" data-filtro="llaveros" aria-pressed="false">Llaveros</button>
+        </div>
+        <div class="rejilla">
+          <figure class="producto" data-cat="collares">
+            <button type="button"><img src="1000342603.jpg" alt="Collar de perlas negras con moños" loading="lazy"></button>
+            <figcaption>Collar de perlas negras con moños</figcaption>
+          </figure>
+          <figure class="producto" data-cat="collares">
+            <button type="button"><img src="1000342607.jpg" alt="Collar de cerezas" loading="lazy"></button>
+            <figcaption>Collar de cerezas</figcaption>
+          </figure>
+          <figure class="producto" data-cat="collares aritos">
+            <button type="button"><img src="1000342604.jpg" alt="Set de perlas: collar y aritos" loading="lazy"></button>
+            <figcaption>Set de perlas: collar y aritos</figcaption>
+          </figure>
+          <figure class="producto" data-cat="pulseras">
+            <button type="button"><img src="1000342601.jpg" alt="Pulseras de perlas con cerezas" loading="lazy"></button>
+            <figcaption>Pulseras de perlas con cerezas</figcaption>
+          </figure>
+          <figure class="producto" data-cat="collares">
+            <button type="button"><img src="1000342608.jpg" alt="Collar de arándanos" loading="lazy"></button>
+            <figcaption>Collar de arándanos</figcaption>
+          </figure>
+          <figure class="producto" data-cat="pulseras">
+            <button type="button"><img src="1000342602.jpg" alt="Pulseras de estrellas" loading="lazy"></button>
+            <figcaption>Pulseras de estrellas</figcaption>
+          </figure>
+          <figure class="producto" data-cat="aritos">
+            <button type="button"><img src="1000342605.jpg" alt="Aritos de rosas y perlas" loading="lazy"></button>
+            <figcaption>Aritos de rosas y perlas</figcaption>
+          </figure>
+          <figure class="producto" data-cat="llaveros">
+            <button type="button"><img src="1000342606.jpg" alt="Llavero personalizado" loading="lazy"></button>
+            <figcaption>Llavero personalizado</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="nosotros" id="nosotros">
+      <div class="contenedor">
+        <h2>Somos Star&amp;Potato</h2>
+        <p>Somos un pequeño emprendimiento y nos mueve una idea simple: hacer felices a nuestros clientes.</p>
+        <p>Cada pieza se prepara con cariño, pensando en quien la va a usar.</p>
+      </div>
+    </section>
+
+    <section class="contacto" id="contacto">
+      <div class="contenedor">
+        <h2>Hablemos</h2>
+        <p>Escríbenos por Instagram para pedir o preguntar por tus joyitas favoritas.</p>
+        <a class="boton" href="https://instagram.com/star_potato21" target="_blank" rel="noopener">Escríbenos a @star_potato21</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Star&amp;Potato</p>
+  </footer>
+  <dialog id="visor" aria-label="Foto ampliada">
+    <img src="" alt="">
+    <p></p>
+    <button type="button" class="boton cerrar">Cerrar</button>
+  </dialog>
+
+  <script>
+    const botones = document.querySelectorAll(".filtros button");
+    const productos = document.querySelectorAll(".producto");
+    botones.forEach(function (b) {
+      b.addEventListener("click", function () {
+        botones.forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+        productos.forEach(function (p) {
+          p.hidden = b.dataset.filtro !== "todos" && !p.dataset.cat.split(" ").includes(b.dataset.filtro);
+        });
+      });
+    });
+
+    const visor = document.getElementById("visor");
+    productos.forEach(function (p) {
+      p.querySelector("button").addEventListener("click", function () {
+        const img = p.querySelector("img");
+        visor.querySelector("img").src = img.src;
+        visor.querySelector("img").alt = img.alt;
+        visor.querySelector("p").textContent = p.querySelector("figcaption").textContent;
+        visor.showModal();
+      });
+    });
+    visor.addEventListener("click", function (e) {
+      if (e.target === visor || e.target.classList.contains("cerrar")) visor.close();
+    });
+  </script>
+
+</body>
+</html>
